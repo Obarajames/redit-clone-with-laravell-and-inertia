@@ -5,7 +5,7 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
-
+import BreezeErrorInput from '@/Components/InputError.vue';
 const form = useForm({
     name: '',
     username: '',
@@ -19,6 +19,8 @@ const submit = () => {
         onFinish: () => form.reset('password', 'password_confirmation'),
     });
 };
+
+defineProps({ errors: Object })
 </script>
 
 <template>
@@ -34,12 +36,12 @@ const submit = () => {
                     type="text"
                     class="mt-1 block w-full"
                     v-model="form.name"
-                    required
                     autofocus
                     autocomplete="name"
                 />
 
-                <InputError class="mt-2" :message="form.errors.name" />
+                
+                <BreezeErrorInput :message="errors.name"/>
             </div>
 
             <div class="mt-4">
@@ -50,11 +52,11 @@ const submit = () => {
                     type="text"
                     class="mt-1 block w-full"
                     v-model="form.username"
-                    required
                     autocomplete="username"
                 />
 
-                <InputError class="mt-2" :message="form.errors.email" />
+                
+                <BreezeErrorInput :message="errors.username"/>
             </div>
 
             <div class="mt-4">
@@ -65,11 +67,10 @@ const submit = () => {
                     type="email"
                     class="mt-1 block w-full"
                     v-model="form.email"
-                    required
                     autocomplete="email"
                 />
-
-                <InputError class="mt-2" :message="form.errors.email" />
+                <BreezeErrorInput :message="errors.email"/>
+                
             </div>
 
             <div class="mt-4">
@@ -80,11 +81,10 @@ const submit = () => {
                     type="password"
                     class="mt-1 block w-full"
                     v-model="form.password"
-                    required
                     autocomplete="new-password"
                 />
-
-                <InputError class="mt-2" :message="form.errors.password" />
+                <BreezeErrorInput :message="errors.password"/>
+              
             </div>
 
             <div class="mt-4">
@@ -95,11 +95,10 @@ const submit = () => {
                     type="password"
                     class="mt-1 block w-full"
                     v-model="form.password_confirmation"
-                    required
                     autocomplete="new-password"
                 />
-
-                <InputError class="mt-2" :message="form.errors.password_confirmation" />
+                <BreezeErrorInput :message="errors.password_confirmation"/>
+               
             </div>
 
             <div class="flex items-center justify-end mt-4">
